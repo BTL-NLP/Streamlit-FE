@@ -6,7 +6,7 @@ from datetime import datetime
 import logging
 import os
 from dotenv import load_dotenv
-# Setup logging (thêm sau imports)
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -18,14 +18,12 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 load_dotenv()
 
-# ====== Cấu hình trang ======
 st.set_page_config(
     page_title="Vietnamese Text Summarization", 
     page_icon="📄", 
     layout="wide"
 )
 
-# ====== CSS tùy chỉnh ======
 st.markdown("""
 <style>
 .main-header {
@@ -46,14 +44,10 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ====== Cấu hình API ======
 API_BASE_URL = os.getenv("API_BASE_URL", st.secrets.get("API_BASE_URL", "http://localhost:8000"))
 
-# ====== Sidebar: cấu hình ======
 with st.sidebar:
     st.header("⚙️ Cấu hình Tóm tắt")
-    
-    # API Status Check
     st.subheader("🔌 Trạng thái API")
     
     def check_api_health():
@@ -103,11 +97,9 @@ with st.sidebar:
         else:
             st.error("❌ API không khả dụng!")
 
-# ====== Header chính ======
 st.markdown('<p class="main-header">📄 Vietnamese Text Summarization</p>', unsafe_allow_html=True)
 st.markdown("Sử dụng Gemma-2 để tóm tắt văn bản tiếng Việt một cách thông minh và chính xác.")
 
-# ====== Hiển thị kết quả demo ======
 if "demo_result" in st.session_state:
     st.subheader("🎯 Kết quả Demo")
     demo_data = st.session_state["demo_result"]
@@ -126,10 +118,8 @@ if "demo_result" in st.session_state:
     
     st.divider()
 
-# ====== Input chính ======
 st.subheader("✏️ Nhập văn bản cần tóm tắt")
 
-# Tabs cho các cách nhập input khác nhau
 tab1, tab2, tab3 = st.tabs(["📝 Nhập thủ công", "📋 Ví dụ mẫu", "📁 Upload file"])
 
 with tab1:
@@ -167,7 +157,6 @@ with tab3:
             st.session_state["manual_input"] = file_content
             st.rerun()
 
-# ====== Nút tóm tắt ======
 if st.button("🤖 Tóm tắt văn bản", type="primary", use_container_width=True):
     text_to_summarize = " ".join(st.session_state.get("manual_input", "").split())
     
@@ -237,13 +226,11 @@ if st.button("🤖 Tóm tắt văn bản", type="primary", use_container_width=T
                         st.metric("📏 Độ dài gốc", f"{result['input_length']} ký tự")
                         st.metric("📏 Độ dài tóm tắt", f"{result['output_length']} ký tự")
                         
-                        # Tính tỷ lệ nén
                         compression_ratio = round((1 - result['output_length'] / result['input_length']) * 100, 1)
                         st.metric("📉 Tỷ lệ nén", f"{compression_ratio}%")
                         
                         st.divider()
                         
-                        # Thông tin thêm
                         st.markdown("**Tham số sử dụng:**")
                         st.text(f"Max length: {max_new_tokens }")
                         st.text(f"Temperature: {temperature}")
