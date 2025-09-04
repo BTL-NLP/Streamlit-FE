@@ -1,0 +1,73 @@
+# --- Python bytecode / cache ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Virtual envs (hiện tại & sau này) ---
+Scripts/
+Lib/
+Include/
+etc/
+share/
+pyvenv.cfg
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# --- Streamlit ---
+.streamlit/credentials.toml
+.streamlit/secrets.toml
+.streamlit/state.json
+!.streamlit/config.toml
+!.streamlit/secrets.example.toml
+streamlit_requests.log
+.streamlit-cache/
+streamlit-cache/
+.cache/
+cache/
+
+# --- Logs ---
+logs/
+*.log
+
+# --- Env & secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Packaging / build ---
+build/
+dist/
+.eggs/
+*.egg-info/
+pip-wheel-metadata/
+wheels/
+
+# --- Tests / coverage ---
+.pytest_cache/
+.coverage*
+htmlcov/
+*.cover
+nosetests.xml
+
+# --- Linters / type checkers ---
+.mypy_cache/
+.dmypy.json
+.pytype/
+.pyre/
+.ruff_cache/
+
+# --- IDE / OS junk ---
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# --- Data / DB (tùy dự án) ---
+data/raw/
+data/tmp/
+*.sqlite3
+*.db
