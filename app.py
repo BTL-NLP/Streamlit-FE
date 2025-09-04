@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 import logging
 import os
-
+from dotenv import load_dotenv
 # Setup logging (thêm sau imports)
 logging.basicConfig(
     level=logging.INFO,
@@ -16,6 +16,7 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
+load_dotenv()
 
 # ====== Cấu hình trang ======
 st.set_page_config(
