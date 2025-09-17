@@ -44,7 +44,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-API_BASE_URL = os.getenv("API_BASE_URL", st.secrets.get("API_BASE_URL", "http://localhost:8000"))
+API_BASE_URL = os.getenv("API_BASE_URL")
 
 with st.sidebar:
     st.header("⚙️ Cấu hình Tóm tắt")
